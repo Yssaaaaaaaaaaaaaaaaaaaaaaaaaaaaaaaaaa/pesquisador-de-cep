@@ -3,18 +3,165 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Busca CEP</title>
+  <title>🔍 Busca CEP</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    body {
+      background: linear-gradient(135deg, #2a0845 0%, #4a148c 20%, #6a1b9a 40%, #8e24aa 60%, #ab47bc 80%, #ce93d8 100%);
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+    }
+
+    .container {
+      background: linear-gradient(135deg, rgba(74, 20, 140, 0.85), rgba(142, 36, 170, 0.75));
+      backdrop-filter: blur(12px);
+      border-radius: 20px;
+      padding: 40px;
+      max-width: 600px;
+      width: 100%;
+      box-shadow: 0 8px 32px rgba(74, 20, 140, 0.6);
+      border: 2px solid rgba(206, 147, 216, 0.4);
+    }
+
+    h1 {
+      text-align: center;
+      color: #fff;
+      font-size: 2rem;
+      margin-bottom: 10px;
+      text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    }
+
+    .subtitle {
+      text-align: center;
+      color: #e1bee7;
+      margin-bottom: 20px;
+    }
+
+    .search-box {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 10px;
+    }
+
+    input[type="text"] {
+      flex: 1;
+      padding: 14px 18px;
+      font-size: 1rem;
+      border: 2px solid #ab47bc;
+      border-radius: 12px;
+      outline: none;
+      background: rgba(255, 255, 255, 0.9);
+      color: #4a148c;
+      transition: all 0.3s;
+    }
+
+    input[type="text"]:focus {
+      border-color: #ffd54f;
+      box-shadow: 0 0 15px rgba(255, 213, 79, 0.5);
+    }
+
+    .btn-buscar {
+      padding: 14px 24px;
+      font-size: 1rem;
+      font-weight: bold;
+      background: linear-gradient(135deg, #ffd54f, #ff8f00);
+      color: #4a148c;
+      border: none;
+      border-radius: 12px;
+      cursor: pointer;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .btn-buscar:hover {
+      transform: scale(1.05);
+      box-shadow: 0 4px 15px rgba(255, 213, 79, 0.4);
+    }
+
+    /* Resultado */
+    #resultado {
+      margin-top: 20px;
+      padding: 20px;
+      border-radius: 15px;
+      font-size: 1.05rem;
+      line-height: 1.6;
+      transition: all 0.4s;
+      display: none;
+    }
+
+    #resultado.show {
+      display: block;
+      animation: fadeInUp 0.5s ease forwards;
+    }
+
+    #resultado h3 {
+      font-size: 1.3rem;
+      margin-bottom: 12px;
+    }
+
+    #resultado p {
+      margin: 5px 0;
+      padding: 8px 12px;
+      background: rgba(255, 255, 255, 0.15);
+      border-radius: 8px;
+    }
+
+    #resultado p strong {
+      display: inline-block;
+      min-width: 100px;
+    }
+
+    /* Cores da mensagem */
+    .mensagem-sucesso {
+      background: linear-gradient(135deg, #00c853, #69f0ae);
+      color: #064e2b;
+      box-shadow: 0 4px 20px rgba(0, 200, 83, 0.4);
+    }
+
+    .mensagem-erro {
+      background: linear-gradient(135deg, #ff1744, #ff8a80);
+      color: #fff;
+      box-shadow: 0 4px 20px rgba(255, 23, 68, 0.4);
+    }
+
+    .mensagem-aviso {
+      background: linear-gradient(135deg, #ffd54f, #ffe082);
+      color: #5d4037;
+      box-shadow: 0 4px 20px rgba(255, 213, 79, 0.4);
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+  </style>
 </head>
 <body>
+  <div class="container">
+    <h1>🔍 Buscador de CEP</h1>
+    <p class="subtitle">Digite o CEP e descubra o endereço da cidade</p>
 
-  <h1>Consulta de CEP</h1>
+    <div class="search-box">
+      <input type="text" id="cepInput" placeholder="Digite o CEP (ex: 01001000)" maxlength="8">
+      <button class="btn-buscar" onclick="buscarCEP()">Buscar</button>
+    </div>
 
-  <div>
-    <input type="text" id="cepInput" placeholder="Digite o CEP (ex: 01001000)">
-    <button onclick="buscarCEP()">Buscar</button>
+    <div id="resultado"></div>
   </div>
-
-  <div id="resultado" style="margin-top: 15px;"></div>
 
   <script src="script.js"></script>
 </body>
